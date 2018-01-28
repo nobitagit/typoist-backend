@@ -10,7 +10,7 @@ import scala.util.Random
 import scala.concurrent.duration._
 import scala.concurrent.{ExecutionContext, Future, Promise}
 
-import models.{Stock, Paragraph}
+import models.{Stock, Paragraph, ParagraphSeq}
 
 //case class Paragraph(
 //  text: String,
@@ -45,6 +45,11 @@ class AsyncController @Inject()(cc: ControllerComponents, actorSystem: ActorSyst
   private val paragraphs: List[String] = List(
     "One",
     "Two"
+  )
+
+  private val textCollection: Seq[Seq[String]] = Seq(
+    Seq("I have been typing for 4 minutes", "This is a new sentence"),
+    Seq("A new string in a Seq", "Typing involves exercising muscle memory")
   )
   /**
    * Creates an Action that returns a plain text message after a delay
@@ -81,6 +86,18 @@ class AsyncController @Inject()(cc: ControllerComponents, actorSystem: ActorSyst
     val stock = Stock("GOOG", 650.0)
     val ret: JsValue = Json.toJson(stock)
     Ok(ret)
+  }
+
+
+  def getArr = Action {
+    Ok(Json.toJson(getRandomCollection))
+  }
+
+  private def getRandomCollection: JsValue = {
+    val rand = new Random()
+    val idx = rand.nextInt(textCollection.length)
+    val ret = textCollection(idx)
+    Json.toJson(ParagraphSeq(ret))
   }
 
   private def getRandomText(): Future[JsValue] = {

@@ -75,8 +75,4 @@ sbt
 sbt-dist/
 sbt.bat
 
-build.gradle
-build.sbt
 gradle/
-gradlew
-gradlew.bat
