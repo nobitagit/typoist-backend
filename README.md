@@ -1,4 +1,7 @@
-# play-scala-starter-example
+# Typoist backend
+
+Very much a WIP.
+Based on play-scala-starter-example
 
 [<img src="https://img.shields.io/travis/playframework/play-scala-starter-example.svg"/>](https://travis-ci.org/playframework/play-scala-starter-example)
 
